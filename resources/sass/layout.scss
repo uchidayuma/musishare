@@ -1,0 +1,25 @@
+.navbar {
+    background-color: #f8f3d4;
+    &__logo {
+        height: 60px;
+    }
+}
+
+.alert {
+    width: 80%;
+    margin: auto;
+}
+
+.footer {
+    background-color: #423a3a;
+    &__list {
+        list-style: none;
+    }
+}
+@media only screen and (max-width: 991px) {
+    .footer {
+        &__list li {
+            line-height: 2.5;
+        }
+    }
+}

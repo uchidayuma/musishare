@@ -1,0 +1,14 @@
+body {
+    background-color: #f8f3d4;
+}
+.profile {
+    max-width: 500px;
+    margin: auto;
+    &__image {
+        max-width: 100%;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
