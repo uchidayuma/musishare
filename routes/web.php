@@ -18,5 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/mypage', 'MypageController@edit')->name('mypage.edit');
-Route::patch('/mypage/update', 'MypageController@update')->name('mypage.update');
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'mypage'], function () {
+        Route::get('', 'MypageController@edit')->name('mypage.edit');
+        Route::patch('update', 'MypageController@update')->name('mypage.update');
+        Route::get('password/change', 'MypageController@password')->name('mypage.password');
+        Route::patch('password/change', 'MypageController@passwordChange')->name('mypage.password.change');
+    });
+});
