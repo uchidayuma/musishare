@@ -47,4 +47,11 @@ class MypageController extends Controller
 
       return redirect('/mypage')->with('success', 'パスワードの変更が完了しました。');
     }
+
+    public function show($id){
+        $user = User::find($id);
+        // $user = User::findOrFail($id);
+        // TODOあとで作品取得する
+        return view('mypage/show', compact('user'));
+    }
 }
