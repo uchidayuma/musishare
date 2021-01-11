@@ -24,5 +24,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('update', 'MypageController@update')->name('mypage.update');
         Route::get('password/change', 'MypageController@password')->name('mypage.password');
         Route::patch('password/change', 'MypageController@passwordChange')->name('mypage.password.change');
+        Route::get('{id}', 'MypageController@show')->name('mypage.show');
     });
 });
