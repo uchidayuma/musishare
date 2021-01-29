@@ -1,0 +1,18 @@
+body {
+    background-color: #f8f3d4;
+}
+.breadcrumb {
+    background-color: #fff;
+    max-width: 960px;
+    margin: auto;
+}
+.form {
+    max-width: 500px;
+    margin: auto;
+}
+.music {
+    &__image {
+        max-width: 100%;
+        object-fit: cover;
+    }
+}

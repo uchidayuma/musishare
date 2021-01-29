@@ -2,5 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/top.css": "/css/top.css",
     "/css/mypage.css": "/css/mypage.css",
+    "/css/music/create.css": "/css/music/create.css",
+    "/css/music/show.css": "/css/music/show.css",
     "/css/app.css": "/css/app.css"
 }
