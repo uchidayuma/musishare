@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMusicsTable extends Migration
+class CreateMusicTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateMusicsTable extends Migration
      */
     public function up()
     {
-        Schema::create('musics', function (Blueprint $table) {
+        Schema::create('music', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('title');
             $table->text('description');
             $table->text('mp3');
-            $table->text('image');
+            $table->text('image')->nullable()->default(null);
             // 外部キー制約をつけたい場合、参照先のカラム型と合わせる
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
@@ -28,7 +28,7 @@ class CreateMusicsTable extends Migration
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             // 外部キー制約
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -39,6 +39,6 @@ class CreateMusicsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('musics');
+        Schema::dropIfExists('music');
     }
 }

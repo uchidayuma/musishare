@@ -31,7 +31,7 @@
 
 
 @if ($errors->any())
-<div class="alert alert-danger">
+<div class="alert alert-danger mb-4">
 	<button type="button" class="close" data-dismiss="alert">×</button>	
   フォームが正しく入力されているか確認してください。
   @foreach ($errors->all() as $error)
