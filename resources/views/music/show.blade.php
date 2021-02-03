@@ -5,12 +5,14 @@
 @endsection
 
 @section('javascript')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <script src="{{ asset('library/audiojs/audio.min.js') }}"></script>
 <script>
   audiojs.events.ready(function() {
     var as = audiojs.createAll();
   });
 </script>
+<script src="{{ asset('js/music/show.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -36,7 +38,11 @@
   <div class='row'>
     <div class='col-md-12 col-lg-6 text-center'>
       <a href="{{ route('music.download', ['id' => $music['id']])}}" target="blank">ダウンロード</a>
-      <p>いいね！</p>
+    @if($liked)
+      <p onclick="like({{ $music['id'] }}, {{ $music['user_id'] }})"><i id='like-icon' class="fas fa-heart color-pink"></i>いいね！</p>
+    @else
+      <p onclick="like({{ $music['id'] }}, {{ $music['user_id'] }})"><i id='like-icon' class="far fa-heart"></i>いいね！</p>
+    @endif
     </div>
     <div class='col-md-12 col-lg-6 text-center'>
       <audio src="{{ $music['mp3'] }}" preload="auto" />
