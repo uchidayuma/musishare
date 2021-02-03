@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateMusicRequest;
 use App\models\Category;
 use App\models\Music;
+use App\models\Like;
 use Storage;
 
 class MusicController extends Controller
@@ -76,7 +77,8 @@ class MusicController extends Controller
           ->join('users', 'users.id', '=', 'music.user_id')
           ->join('categories', 'categories.id', '=', 'music.category_id')
           ->findOrFail($id);
-        return view('music.show', compact('music'));
+        $liked = Like::where('music_id', $id)->where('user_id', \Auth::id())->exists();
+        return view('music.show', compact('music', 'liked'));
     }
 
     /**
@@ -130,6 +132,25 @@ class MusicController extends Controller
         ];
 
         return response($content, 200, $headers);
+    }
+
+    public function ajaxLike(Request $request)
+    {
+        $posts = $request->all();
+          \Log::debug(print_r($posts, true));
+        if( !\Auth::user() ){
+          return redirect('/login');
+        }
+        // likesテーブルにデータがあった場合（すでにいいね！されていた場合）
+        if( Like::where('music_id', $posts['id'])->where('user_id', $posts['user_id'])->exists() ){
+            Like::where('music_id', $posts['id'])->where('user_id', $posts['user_id'])->delete();
+            return response()->json(['status' => true, 'result' => 'dislike']);
+        }else{
+          \Log::debug(print_r($posts['id'], true));
+        // likesテーブルにデータがない場合（いいね！されていない場合）
+            Like::insert(['music_id' => $posts['id'], 'user_id' => $posts['user_id']]);
+            return response()->json(['status' => true, 'result' => 'like']);
+        }
     }
 }
 

@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('create', 'MusicController@create')->name('music.create');
         Route::post('store', 'MusicController@store')->name('music.store');
         Route::get('download/{id}', 'MusicController@download')->name('music.download');
+        Route::post('ajax/like', 'MusicController@ajaxLike')->name('music.ajaxlike');
     });
     Route::group(['prefix' => 'mypage'], function () {
         Route::get('', 'MypageController@edit')->name('mypage.edit');
