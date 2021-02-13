@@ -10960,6 +10960,10 @@ a.text-dark:focus {
   font-weight: bold !important;
 }
 
+.bg-yellow {
+  background-color: #f8f3d4 !important;
+}
+
 .navbar {
   background-color: #f8f3d4;
 }

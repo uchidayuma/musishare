@@ -1,23 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<a href="#" class="banner-wrapper d-block text-center mb-3 mt-3"><img class="banner" src="{{ asset('images/dummy-banner.png') }}"></a>
+<a href="#" class="banner-wrapper d-block text-center mb-5"><img class="banner" src="{{ asset('images/dummy-banner.png') }}"></a>
+<section class="popular">
+  <div class="container">
+    <h2 class="color-main bold text-center">人気のフレーズ</h2>
+  </div>
+</section>
+<section class="public bg-yellow">
+  <div class="container">
+    <h2 class="color-main bold text-center">公開中のフレーズ</h2>
+  </div>
+</section>
 @endsection
+

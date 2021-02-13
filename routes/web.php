@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'music'], function () {
         Route::get('create', 'MusicController@create')->name('music.create');
