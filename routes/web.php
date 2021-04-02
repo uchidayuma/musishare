@@ -14,10 +14,15 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'music'], function () {
+    Route::get('list', 'MusicController@index')->name('music.index');
+});
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'music'], function () {
         Route::get('create', 'MusicController@create')->name('music.create');
         Route::post('store', 'MusicController@store')->name('music.store');
+        Route::get('edit/{id}', 'MusicController@edit')->name('music.edit');
+        Route::post('update/{id}', 'MusicController@update')->name('music.update');
         Route::get('download/{id}', 'MusicController@download')->name('music.download');
         Route::post('ajax/like', 'MusicController@ajaxLike')->name('music.ajaxlike');
     });

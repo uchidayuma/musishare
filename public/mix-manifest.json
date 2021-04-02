@@ -5,5 +5,7 @@
     "/css/mypage.css": "/css/mypage.css",
     "/css/music/create.css": "/css/music/create.css",
     "/css/music/show.css": "/css/music/show.css",
+    "/css/music/index.css": "/css/music/index.css",
+    "/css/components/music-card.css": "/css/components/music-card.css",
     "/css/app.css": "/css/app.css"
 }

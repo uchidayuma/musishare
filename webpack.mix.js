@@ -17,4 +17,6 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/mypage.scss', 'public/css')
    .sass('resources/sass/music/create.scss', 'public/css/music')
    .sass('resources/sass/music/show.scss', 'public/css/music')
+   .sass('resources/sass/music/index.scss', 'public/css/music')
+   .sass('resources/sass/components/music-card.scss', 'public/css/components')
    .sass('resources/sass/app.scss', 'public/css');

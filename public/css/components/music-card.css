@@ -1,0 +1,37 @@
+.music {
+  width: 20vw;
+  margin: auto;
+  margin-bottom: 5rem;
+}
+
+.music__image {
+  max-height: 13.3vw;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user__image {
+  max-width: 75px;
+}
+
+.user__name {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .music {
+    width: 100%;
+  }
+
+  .music__image {
+    max-height: calc( ( (100vw * 0.916) - 30px) * (2 / 3));
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+

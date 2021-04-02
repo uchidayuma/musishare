@@ -23,30 +23,35 @@
   </ol>
 </nav>
 <section class='music bg-white p-lg-5'>
-  <div class='row'>
-    <h1 class='color-main bold'>{{ $music['title'] }}</h1>
-    <p class='color-accent bold ml-auto'>{{$music['category_name']}}</p>
+  <div class='row title-row mb-3 w-100'>
+    <h1 class='music__title color-main bold'>{{ $music['title'] }}</h1>
+    <p class='color-accent bold ml-auto'>{{ $music['category_name'] }}</p>
   </div>
-  <div class='row'>
-    <div class='col-md-12 col-lg-6 text-center'>
+  <div class='row mb-3'>
+    <div class='col-md-12 col-lg-6'>
       <img id='music__image' class="music__image" src="{{ empty($music['image']) ? '/images/music-dummy.jpg' : $music['image'] }}" >
     </div>
-    <div class='col-md-12 col-lg-6 text-center'>
+    <div class='col-md-12 col-lg-6'>
       <p>{{ nl2br($music['description']) }}</p>
     </div>
   </div>
-  <div class='row'>
+  <div class='row mb-3'>
     <div class='col-md-12 col-lg-6 text-center'>
-      <a href="{{ route('music.download', ['id' => $music['id']])}}" target="blank">ダウンロード</a>
+    <a class='music__download' href="{{ route('music.download', ['id' => $music['id']])}}" target="blank"><i class="fas fa-cloud-download-alt mr-1"></i>ダウンロード</a>
     @if($liked)
-      <p onclick="like({{ $music['id'] }}, {{ $music['user_id'] }})"><i id='like-icon' class="fas fa-heart color-pink"></i>いいね！</p>
+      <p class='music__like' onclick="like({{ $music['id'] }}, {{ $music['user_id'] }})"><i id='like-icon' class="fas fa-heart color-pink mr-1"></i>いいね！</p>
     @else
-      <p onclick="like({{ $music['id'] }}, {{ $music['user_id'] }})"><i id='like-icon' class="far fa-heart"></i>いいね！</p>
+      <p class='music__like' onclick="like({{ $music['id'] }}, {{ $music['user_id'] }})"><i id='like-icon' class="far fa-heart mr-1"></i>いいね！</p>
     @endif
     </div>
     <div class='col-md-12 col-lg-6 text-center'>
       <audio src="{{ $music['mp3'] }}" preload="auto" />
     </div>
   </div>
+  @if( $music['user_id'] === Auth::id() )
+  <div class='row justify-content-around'>
+    <a href="{{ route('music.edit', ['id' => $music['id'] ]) }}" class="btn btn-warning">編集</a> 
+  </div>
+  @endif
 </section>
 @endsection
