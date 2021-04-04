@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateMusicRequest;
+use App\Http\Requests\UpdateMusicRequest;
 use App\models\Category;
 use App\models\Music;
 use App\models\Like;
@@ -16,9 +17,34 @@ class MusicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $params = $request->all();
+        $music_model = new Music();
+        $music_query = $music_model->query()->select('music.*',  'u.id as user_id', 'u.image as user_image', 'u.name as user_name', 'c.name as category_name')
+          ->where('music.status', 1)
+          ->join('users as u', 'music.user_id', '=', 'u.id')
+          ->join('categories as c', 'music.category_id', '=', 'c.id');
+
+        if( !empty($params['title']) ) {
+          $title = $params['title'];
+          $music_query->where(function($query) use ($title, $params) {
+            $query->orWhere('music.title', 'like', "%$title%")->orWhere('music.description', 'like', "%$title%");
+          });
+        }
+        if(!empty($params['category'])){
+          $music_query->where('c.id', $params['category']);
+        }
+        if(!empty($params['order'])){
+          $music_query->orderBy('music.created_at', $params['order']);
+        } else {
+          $music_query->orderBy('music.created_at', 'desc');
+        }
+        $music = $music_query->paginate(12);
+
+        $categories = Category::orderBy('id', 'ASC')->get();
+
+        return view('music.index', compact('music', 'categories'));
     }
 
     /**
@@ -89,7 +115,10 @@ class MusicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $music = Music::where('id', $id)->where('user_id', \Auth::id())->firstOrFail();
+        $categories = Category::orderBy('id', 'ASC')->get();
+
+        return view('music.edit', compact('music', 'categories'));
     }
 
     /**
@@ -99,9 +128,28 @@ class MusicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMusicRequest $request, $id)
     {
-        //
+      $posts = $request->all();
+      // ファイルアップは音楽フレーズ投稿と同じ
+      $image = $request->file('music.image');
+      if(!empty($image)){
+          // バケットの`music/images`フォルダへアップロード
+          $path = Storage::disk('s3')->putFile("music/images", $image, 'public');
+          // アップロードした画像のフルパスを取得
+          $posts['music']['image'] = config('app.s3_url').$path;
+      }
+      $mp3 = $request->file('music.mp3');
+      if(!empty($mp3)){
+          // バケットの`music/mp3s`フォルダへアップロード
+          $path = Storage::disk('s3')->putFile("music/mp3s", $mp3, 'public');
+          // アップロードした画像のフルパスを取得
+          $posts['music']['mp3'] = config('app.s3_url').$path;
+      }
+
+      Music::where('id', $id)->update($posts['music']);
+
+      return redirect( route('music.show', ['id' => $id]) )->with('success', 'フレーズの編集が完了しました。');
     }
 
     /**
@@ -112,7 +160,14 @@ class MusicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $music = Music::find($id);
+        // 念の為本人確認
+        // もしフレーズの持ち主とログインユーザーが異なれば削除せずにリダイレクト
+        if($music['user_id'] != \Auth::id()){
+            return redirect(route('home'))->with('danger', '他人のフレーズは削除できません。');
+        }
+        Music::where('id', $id)->update(['status' => 2]);
+        return redirect(route('home'))->with('success', 'フレーズの削除が完了しました！');
     }
 
     public function download($id){

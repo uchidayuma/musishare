@@ -1,0 +1,9 @@
+body {
+  background-color: #f8f3d4;
+}
+
+.pagination {
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+

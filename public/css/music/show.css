@@ -7,3 +7,50 @@ body {
   margin: auto;
 }
 
+.music {
+  width: 80%;
+  margin: auto;
+}
+
+.music__image {
+  width: 80%;
+}
+
+.music__download {
+  font-size: 1.2rem;
+}
+
+.music__like {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.title-row {
+  margin: auto;
+}
+
+.audiojs {
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 1023px) {
+  .music {
+    width: 100%;
+    padding: 2%;
+  }
+
+  .music__title {
+    font-size: 1.3rem;
+  }
+
+  .music__image {
+    margin-bottom: 1rem;
+  }
+
+  .music__download {
+    display: block;
+    margin-bottom: 1rem;
+  }
+}
+
