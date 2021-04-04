@@ -1,0 +1,21 @@
+body {
+  background-color: #f8f3d4;
+}
+
+.breadcrumb {
+  background-color: #fff;
+  max-width: 960px;
+  margin: auto;
+}
+
+.form {
+  max-width: 500px;
+  margin: auto;
+}
+
+.music__image {
+  max-width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+

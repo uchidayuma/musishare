@@ -40,7 +40,7 @@
     <button class="btn btn-success profile__submit">プロフィール情報を更新</button>
   </div>
 </form>
-<a href="/password/change" class='d-block text-center mt-4 mb-5'>パスワードの変更はこちら</a>
+<a href="/mypage/password/change" class='d-block text-center mt-4 mb-5'>パスワードの変更はこちら</a>
 <h2 class='color-accent bold text-center mb-4'>アカウントの削除</h2>
 <button class='btn btn-secondary btn-lg d-block m-auto'>削除</button>
 @endsection

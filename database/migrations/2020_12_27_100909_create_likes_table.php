@@ -14,14 +14,14 @@ class CreateLikesTable extends Migration
     public function up()
     {
         Schema::create('likes', function (Blueprint $table) {
+            $table->bigInteger('music_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('category_id')->unsigned();
             // timestampと書いてしまうと、レコード挿入時、更新時に値が入らないので、DB::rawで直接書いてます
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             // 外部キー制約
+            $table->foreign('music_id')->references('id')->on('music');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('users');
         });
     }
 

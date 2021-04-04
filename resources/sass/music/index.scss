@@ -1,0 +1,8 @@
+body {
+    background-color: #f8f3d4;
+}
+.pagination{
+    // paginationクラスにはデフォルトでflexboxが適用されているため、justify-contentでコントロール
+    justify-content: center;
+    margin-bottom: 3rem;
+}

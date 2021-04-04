@@ -1,0 +1,45 @@
+body {
+    background-color: #f8f3d4;
+}
+.breadcrumb {
+    max-width: 960px;
+    margin: auto;
+}
+.music{
+    width: 80%;
+    margin: auto;
+    &__image{
+        width: 80%;
+    }
+    &__download{
+        font-size: 1.2rem;
+    }
+    &__like{
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+}
+.title-row{
+    margin: auto;
+}
+.audiojs {
+    width: 100%;
+    height: auto;
+}
+// モバイル向け
+@media screen and (max-width: 1023px) {
+    .music{
+        width: 100%;
+        padding: 2%;
+        &__title{
+            font-size: 1.3rem;
+        }
+        &__image{
+            margin-bottom: 1rem;
+        }
+        &__download{
+            display: block;
+            margin-bottom: 1rem;
+        }
+    }
+}

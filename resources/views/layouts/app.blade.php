@@ -43,7 +43,7 @@
                           <a class="nav-link" href="">MusiShareとは？</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link color-accent bold" href="">音楽を投稿</a>
+                          <a class="nav-link color-accent bold" href="/music/create">音楽を投稿</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
@@ -80,7 +80,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="">
           {{-- フラッシュメッセージのインポート --}}
             @include('layouts.flash-messages')
             @yield('content')
@@ -96,6 +96,7 @@
             <li class='d-none d-lg-block col-lg-1'></li>
           </ul> 
         </footer>
+            @yield('footer')
     </div>
 </body>
 </html>
