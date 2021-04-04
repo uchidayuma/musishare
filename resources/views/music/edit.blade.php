@@ -6,6 +6,7 @@
 
 @section('javascript')
 <script src="{{ asset('js/music/create.js') }}" defer></script>
+<script src="{{ asset('js/utility.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -57,5 +58,10 @@
     </div>
     <button type='submit' class='btn btn-primary btn-lg'>フレーズを更新</button>
   </div> <!-- card -->
+</form>
+<form class='card form my-5' method="POST" action="{{route('music.destroy', ['id' => $music['id']] )}}">
+  @csrf
+  @method('DELETE')
+    <button type='submit' class='btn btn-danger btn-lg' onclick="return confirmCheck('本当に削除していいですか？')">フレーズを削除</button>
 </form>
 @endsection

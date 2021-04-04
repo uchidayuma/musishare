@@ -30,7 +30,7 @@
       </div> <!-- col -->
   @endforeach
     </div>
-    <p class='text-center mb-0'><a href="#" class='list-link btn btn-danger'>音楽フレーズ一覧</a></p>
+    <p class='text-center mb-0'><a href="{{ route('music.index') }}" class='list-link btn btn-danger'>音楽フレーズ一覧</a></p>
   </div><!-- container -->
 </section>
 @endsection

@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'music'], function () {
     Route::get('list', 'MusicController@index')->name('music.index');
+    Route::get('{id}', 'MusicController@show')->name('music.show');
 });
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'music'], function () {
@@ -25,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', 'MusicController@update')->name('music.update');
         Route::get('download/{id}', 'MusicController@download')->name('music.download');
         Route::post('ajax/like', 'MusicController@ajaxLike')->name('music.ajaxlike');
+        Route::delete('destroy/{id}', 'MusicController@destroy')->name('music.destroy');
     });
     Route::group(['prefix' => 'mypage'], function () {
         Route::get('', 'MypageController@edit')->name('mypage.edit');
@@ -33,7 +35,4 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('password/change', 'MypageController@passwordChange')->name('mypage.password.change');
         Route::get('{id}', 'MypageController@show')->name('mypage.show');
     });
-});
-Route::group(['prefix' => 'music'], function () {
-    Route::get('{id}', 'MusicController@show')->name('music.show');
 });

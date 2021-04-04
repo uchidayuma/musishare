@@ -160,7 +160,14 @@ class MusicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $music = Music::find($id);
+        // 念の為本人確認
+        // もしフレーズの持ち主とログインユーザーが異なれば削除せずにリダイレクト
+        if($music['user_id'] != \Auth::id()){
+            return redirect(route('home'))->with('danger', '他人のフレーズは削除できません。');
+        }
+        Music::where('id', $id)->update(['status' => 2]);
+        return redirect(route('home'))->with('success', 'フレーズの削除が完了しました！');
     }
 
     public function download($id){
